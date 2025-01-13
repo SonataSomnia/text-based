@@ -3,6 +3,7 @@
 [start_keyconfig]
 @hidemenubutton
 
+*start
 #
 [current layer="message1"]
 [er]
@@ -25,11 +26,14 @@
 *node1
 #
 [er]
-第一种选择支
+第一种选择支[l][r]
+[opt target=*start]返回[endopt]
 [s]
 
 *node2
 #
 [er]
-第二种选择支
+第二种选择支[l][r]
+[opt target=*start]返回[endopt]
+
 [s]
