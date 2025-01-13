@@ -1,0 +1,81 @@
+/* :root {
+    --basic: linear-gradient(to bottom, #ffffff00,#ffffff40, #ffffff80,#6da5d8ff,#98509dff, #5f5195ff, #2b4b7dff, #003f5bff, #081847ff, #000000ff,#000000ff,#000000ff);
+}
+body{
+        background: black;
+    
+    
+}
+span{
+    background: var(--basic),linear-gradient(270deg, #F9FFC3, #FFDB32);
+    background-size: 100% 500%;
+    font-family: LinguaSomnia;
+    font-size: 45px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    padding-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    background-position: 0% 0%;
+    background-repeat: no-repeat;
+    opacity: 1;
+    animation: transit 3s forwards normal 1;
+}
+
+@keyframes transit{
+    0% {
+        background-position: 0% 0%;
+        opacity: 1;
+    }
+    100% {
+        background-position: 0% 100%;
+        opacity: 0;
+    }
+
+}
+/* svg{
+    height:1em;
+    width:1em;
+    bottom:0;
+    overflow: visible;
+    
+}
+svg text {
+    font-family: LinguaSomnia;
+    letter-spacing:0;
+    stroke: #ffa5d8;
+    font-size: 64px;
+    stroke-width: 1;
+    height:1.5em;
+    /* animation: textAnimate 5s forwards normal 1; */
+/*
+}
+text{
+    overflow: visible;
+    height: 1em;
+    display: inline-block;
+    dominant-baseline:middle;
+}
+
+@keyframes textAnimate {
+    0% {
+        stroke-dasharray: 0 20%;
+        stroke-dashoffset: 30%;
+        fill: hsl(189, 68%, 75%)
+    }
+
+    50% {
+        stroke-dasharray: 20% 0;
+        stroke-dashoffstet: -30%;
+        fill: hsla(189, 68%, 75%, 0%)
+    }
+
+    100% {
+        stroke-dasharray: 0 50%;
+        stroke-dashoffset: 20%;
+        fill: hsla(189, 68%, 75%, 0%)
+    }
+
+} */ 

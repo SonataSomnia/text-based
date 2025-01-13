@@ -1,0 +1,25 @@
+/* ウェブフォントを使用する場合はここに定義を追加して下さい */
+@font-face {
+    font-family: "LinguaSomnia";
+    src: url("../../data/others/LinguaSomnia.woff2") format("woff2"),
+        url("../../data/others/LinguaSomnia.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "VonwaonBitmap";
+    src: url("../../data/others/VonwaonBitmap-16px.eot") format("eot"),
+        url("../../data/others/VonwaonBitmap-16px.woff") format("woff"),
+        url("../../data/others/VonwaonBitmap-16px.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SourceHanSerif";
+    src: url("../../data/others/SourceHanSerifCN-VF.ttf.woff2") format("woff2"),
+        url("../../data/others/SourceHanSerifCN-VF.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
