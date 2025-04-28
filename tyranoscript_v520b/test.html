@@ -6,19 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文字溶解效果</title>
     <link rel="stylesheet" href="\tyrano\css\font.css">
-    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="\test.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
 <body>
-    <span>ɞːʈʰ˟ɞ̅ʈʐɻ̈˩̀</span>
-    <!-- <span>
-        <svg>
-            <text x=50% y=75% text-anchor="middle" >
-                ɞːʈʰ˟ɞ̅ʈʐɻ̈˩̀
-        </text>
-        </svg>
-    </span>
-    啊？ -->
+  <input type="text" id="characterInput" placeholder="输入一个汉字" maxlength="1">
+  <button id="generateBtn">生成 SVG</button>
+  <div id="svgContainer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/opentype.js/dist/opentype.min.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>

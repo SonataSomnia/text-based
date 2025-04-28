@@ -1030,7 +1030,6 @@ tyrano.plugin.kag.tag.text = {
       }, this.kag.tmp.ch_speed)
       : $.setTimeout(() => {
         if(!discard){this.finishAddingChars()};
-        console.log(discard);
       }, this.kag.tmp.ch_speed);
   },
   checkClickInterrupt: function (j_msg_inner) {
@@ -2076,6 +2075,55 @@ tyrano.plugin.kag.tag.mtext = {
     1 != pm.wait && this.kag.ftag.nextOrder();
   },
 };
+tyrano.plugin.kag.tag.transit={
+  vital:["style","text1","text2","x","y"],
+  pm: {
+    style: "", text1: "", text2: "", x: 0, y: 0, layer:"0",page: "fore",
+},
+  start: function(pm){
+    that=this;
+    const svgNS = 'http://www.w3.org/2000/svg';
+    var target_layer = this.kag.layer.getLayer(pm.layer, pm.page).get(0), 
+      svgGradient = cssGradientToSvgGradient("--"+pm.style, pm.style+"-grad"),
+      container=document.createElement('span');
+    container.style.position = "absolute";
+    container.style.left = pm.x + "px";
+    container.style.top = pm.y + "px";
+    container.style.transform = "translate(-50%, -50%)";
+    target_layer.appendChild(container);
+    var svg1 = document.createElementNS(svgNS, 'svg');
+    svg1.classList.add(pm.style);
+    svg1.innerHTML=`
+        <text  x=50% y=50% text-anchor="middle" dominant-baseline="central" fill="url(#${pm.style}-grad)">
+            ${pm.text1}
+        </text>`
+    container.append(svg1);
+    svg1.append(svgGradient);
+    svg1.style.animation = "fadeIn 1s forwards normal 1";
+    svg1.style.strokeDasharray ="0 400%";
+    svg1.addEventListener('animationend', function () {
+      svg1.style.animation = "svgEnter 4s forwards normal 1";
+      svg1.addEventListener('animationend', function () {
+        svg1.innerHTML = `
+        <text text-anchor="middle" dominant-baseline="central" fill="url(#${pm.style}-grad)">
+            ${pm.text2}
+        </text>`;
+        svg1.getElementsByTagName('text')[0].style.fontSize="144px"
+        svg1.append(svgGradient);
+        svg1.style.animation = "svgExit 4s forwards normal 1";
+        svg1.addEventListener('animationend', function () {
+          svg1.style.animation = "fadeOut 1s forwards normal 1";
+          svg1.addEventListener('animationend', function () {
+            container.remove();
+            that.kag.ftag.nextOrder();
+          });
+        });
+      });
+    });
+  },
+},
+
+
 tyrano.plugin.kag.tag.backlay = {
   pm: { layer: "" },
   start: function (pm) {
@@ -2189,12 +2237,12 @@ tyrano.plugin.kag.tag.grouplink = {
       top: '45%',
       left: '45%',
     })
-    degree = this.weightedRandom(-1, 1, this.weightFn)*40;
+    degree = this.weightedRandom(-1, 1, this.weightFn)*30;
     $(':root').css('--common-transform', `rotate(${degree}deg)`);
-    for (i = 0; i < groups.length;i++){
+    for (let i = 0; i < groups.length;i++){
       var linkgroup = groups[i];
       var target=targets[i];
-      for(j=0;j<linkgroup.length;j++){
+      for(let j=0;j<linkgroup.length;j++){
         link = linkgroup[j];
         j_message_span = $(`<span>${link}</span>`);
         j_message_span.addClass(pm.style);
@@ -2212,13 +2260,19 @@ tyrano.plugin.kag.tag.grouplink = {
         j_message_span.appendTo(j_span);        
       }
     }
-    //此处添加shuffle
+    const children = j_span.children().toArray();
+    console.log(children);
+    for (let i = children.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [children[i], children[j]] = [children[j], children[i]]; 
+    }
+    j_span.append(children);
     padLen=link.length;
-    for(i=j_span.children().length;i<pm.number;i++){
+    for(let i=j_span.children().length;i<pm.number;i++){
       opacity = 1 - Math.random() / (pm.number - j_span.children().length ) * (i);
       console.log(opacity);
       pad="";
-      for(j=0;j<padLen;j++){
+      for(let j=0;j<padLen;j++){
         value = Math.floor(Math.random()*this.padSheet.length);
         pad += this.padSheet[value];
         console.log(pad,value);
@@ -2978,6 +3032,7 @@ tyrano.plugin.kag.tag.button = {
     keyfocus: "",
     auto_next: "yes",
     role: "",
+    time:0,
   },
   start: function (pm) {
     var target_layer = null;
@@ -3021,6 +3076,9 @@ tyrano.plugin.kag.tag.button = {
     this.setEvent(j_button, pm);
     target_layer.append(j_button);
     "false" == pm.fix && target_layer.show();
+    j_button.css("opacity", 0);
+    $.trans("crossfade", j_button, parseInt(pm.time), "show", function () {
+      j_button.css("opacity", 1);})
     this.kag.ftag.nextOrder();
   },
   setEvent: function (j_button, pm) {
@@ -4023,3 +4081,115 @@ tyrano.plugin.kag.tag.free_layermode = {
     } else that.kag.ftag.nextOrder();
   },
 };
+function cssGradientToSvgGradient(input, id) {
+  const rootStyles = getComputedStyle(document.documentElement);
+  const cssGradient = rootStyles.getPropertyValue(input).trim();
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const gradientRegex = /(linear-gradient|radial-gradient)\(([^,]+),\s*(.+)\)/;
+  const matches = cssGradient.match(gradientRegex);
+
+  if (!matches) {
+    throw new Error('Invalid gradient format');
+  }
+
+  const type = matches[1];
+  const directionOrShape = matches[2];
+  const stops = matches[3].split(',').map(stop => stop.trim());
+
+  var svgGradient;
+  if (type === 'linear-gradient') {
+    const direction = parseLinearGradientDirection(directionOrShape);
+    svgGradient = document.createElementNS(svgNS, 'linearGradient');
+    svgGradient.setAttribute('id', id);
+    svgGradient.setAttribute('x1', direction.x1);
+    svgGradient.setAttribute('y1', direction.y1);
+    svgGradient.setAttribute('x2', direction.x2);
+    svgGradient.setAttribute('y2', direction.y2);
+  } else if (type === 'radial-gradient') {
+    svgGradient = document.createElementNS(svgNS, 'radialGradient');
+    svgGradient.setAttribute('cx', "50%");
+    svgGradient.setAttribute('cy', "50%");
+    svgGradient.setAttribute('r', "50%");
+  } else {
+    throw new Error('Unsupported gradient type');
+  }
+
+  const stopsWithOffsets = generateOffsetsForStops(stops);
+
+  stopsWithOffsets.forEach(({ color, offset }) => {
+    const { stopColor, stopOpacity } = parseColor(color);
+    var stop = document.createElementNS(svgNS, 'stop');
+    stop.setAttribute('offset', offset);
+    stop.setAttribute('style', `stop-color:${stopColor};stop-opacity:${stopOpacity}`);
+    svgGradient.appendChild(stop);
+
+  });
+
+  return svgGradient;
+}
+
+function generateOffsetsForStops(stops) {
+  const parsedStops = stops.map(stop => {
+    const match = stop.match(/(#[0-9a-fA-F]{6,8})|(rgba?\([^)]*\))(?:\s+(\d+%))?/);
+    if (!match) {
+      throw new Error(`Invalid stop format: ${stop}`);
+    }
+    return { color: match[1], offset: match[2] || null };
+  });
+
+  const totalStops = parsedStops.length;
+  let lastOffset = -1;
+
+  parsedStops.forEach((stop, index) => {
+    if (!stop.offset) {
+      stop.offset = `${(index / (totalStops - 1)) * 100}%`;
+    }
+    const numericOffset = parseFloat(stop.offset);
+    if (numericOffset <= lastOffset) {
+      throw new Error('Stops are not in increasing order or overlap');
+    }
+    lastOffset = numericOffset;
+  });
+
+  return parsedStops;
+}
+
+function parseLinearGradientDirection(direction) {
+  switch (direction) {
+    case 'to right':
+      return { x1: '0%', y1: '0%', x2: '100%', y2: '0%' };
+    case 'to left':
+      return { x1: '100%', y1: '0%', x2: '0%', y2: '0%' };
+    case 'to bottom':
+      return { x1: '0%', y1: '0%', x2: '0%', y2: '100%' };
+    case 'to top':
+      return { x1: '0%', y1: '100%', x2: '0%', y2: '0%' };
+    default:
+      const angle = parseFloat(direction);
+      const radians = (angle - 90) * (Math.PI / 180);
+      return {
+        x1: `${50 + 50 * Math.cos(radians)}%`,
+        y1: `${50 + 50 * Math.sin(radians)}%`,
+        x2: `${50 - 50 * Math.cos(radians)}%`,
+        y2: `${50 - 50 * Math.sin(radians)}%`,
+      };
+  }
+}
+
+function parseColor(color) {
+  let stopColor = color;
+  let stopOpacity = 1;
+
+  if (color.startsWith('rgba')) {
+    const rgba = color.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
+    if (rgba) {
+      stopColor = `rgb(${rgba[1]}, ${rgba[2]}, ${rgba[3]})`;
+      stopOpacity = parseFloat(rgba[4]);
+    }
+  } else if (color.startsWith('#') && color.length === 9) {
+    stopColor = color.slice(0, 7);
+    stopOpacity = parseInt(color.slice(7, 9), 16) / 255;
+  }
+
+  return { stopColor, stopOpacity };
+}

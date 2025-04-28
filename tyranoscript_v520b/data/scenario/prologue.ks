@@ -4,14 +4,15 @@
 [chara_new name='w1' storage="../fgimage/chara/witch1.png" jname="witch1"]
 
 @hidemenubutton
-[bg storage="../bgimage/background.png" time=500]
-
+[bg storage="../bgimage/background.png" time=500 wait="false" ]
+[button name="role_button" role="menu" graphic="button/menu.png" enterimg="button/menu_2.png"  x="915" y="0" time=500]
 #
 
 
-;[jump target=*node4 ]
-[layopt layer="message0" visible="false" ]
+
+
 [current layer="message1"]
+
 [er]
 
 
@@ -28,13 +29,14 @@
 [style name="echo"]...世界已经失去了理解。[l][r]
 我需要你的智慧。[l][r][endstyle]
 [font color=0xff0000][afk]不要拯救我。[deafk][resetfont][l][r]
-[opt target=*prologue_start]聆听[endopt][r]
+[opt target=*start]聆听[endopt][r]
 [s]
 
-*prologue_start
+*start
 
 [current layer="message0"]
 [layopt layer="message0" visible="true" ]
+[layopt layer="message1" visible="false" ]
 [cm]
 ...[l][r]
 ..[l][r]
@@ -42,35 +44,45 @@
 
 
 光滑地面的冰凉感是一种怀旧又新奇的独特感觉。[l][r]
-新奇，因为你当然不会在大庭广众之下趴在地上感受它的温度。[l][r]
+新奇，因为你当然不大可能会在大庭广众之下趴在地上，感受它的温度。[l][r]
 怀旧，因为在你的孩提时代，在你学会行走之前，这种感觉曾整日与你相伴。[l][r]
 只是你把它忘了。[l]时间过去太久，久到你不再是孩子，一切童趣也被封装进记忆深处。[l][r]
-但这冰凉感太过独特。它在你的感官系统里涌动着，激发你陈旧的回忆。[l]就像海浪拍在沙滩上，惊飞一群觅食的海鸟……[l][r]
+但这冰凉感太过独特。它在你的感官系统里涌动着，激发你陈旧的回忆。[l][r]
 ……真的是这样吗？[l]你真的想起来了吗？[l][r]
-还是说，那只是建立在你的感官之上的错觉？[l][r]
-毕竟，除了这份冰凉感以外——[l][r]
+还是说，那只是你的大脑为这份体验的存在找了一个合适的借口？[l][r]
+毕竟，如果记忆是海滩上划下的文字，童年回忆肯定是最先被海浪冲刷干净的那批。[l][r]
+你不信邪。你绞尽脑汁，誓要从脑海里挖出点什么来。[l][r]
+你想起……[l][r]
+@wait time=1000
+你什么都没有想起。[l][r]
+此时此刻，除了这份冰凉感以外——[l][r]
 ——你的回忆里空无一物。[l][r]
 ...[p]
-你在一片漆黑中醒来，宛如刚刚经历过一场长梦。[l][r]
-浑身酸痛，四肢麻木无力，[l]唯有那浸透骨髓的冰凉僵硬感触，让你意识到自己正倒在地面上。[l][r]
-那份感官刺激着你的神经，为你洗净脑海里的云翳。[l][r]
+你从一片漆黑中醒来，宛如刚刚经历过一场长梦。[l][r]
+浑身酸痛，四肢麻木无力，[l]唯有那冷彻骨髓的感触，让你意识到自己正趴倒在地面上。[l][r]
+寒冷刺激着你的神经，为你驱净脑海里的云翳。[l][r]
 于是，你尝试着睁开眼睛。[l][r]
-[bg storage="../bgimage/corridor.jpg" time=500]
+[image layer=0 storage="../image/background/corridor.png" time=500 x=80 width=800 y=40 height=800]
 一条长廊映入眼帘。[l][r]
 你很确定自己脑海里没有与这个地方相关的记忆。[l][r]
 ……不过那是理所应当的。你脑海里什么记忆也没有。[l][r]
+你不清楚自己叫什么名字，也忘了自己之前在哪。[l][r]
 自然，你没法知道这是哪里，你又为何身在此处。[l][r]
-看起来，你能做的事只有一件了。[l][r]
-[opt target=*node1]前进[endopt][r]
+你从没想过回忆是这么痛苦的一件事。[l][r]
+就像你脑子里有个上锁的保险箱，[l]而你赤手空拳，试图将它拆开。[l][r]
+你踢了它一脚，绝望地发现它连晃都不晃一下。[l][r]
+……还是放弃做无用功吧。[l][r]
+看起来，你现在能做的事只有一件了。[l][r]
+[opt target=*node1]探索四周[endopt][r]
 [s]
 
 *node1
 #
 [cm]
-你艰难起身，用手扶着墙壁勉强向前迈步。[l][r]
-不知道是不是在地上趴了太久的缘故，你的身体有些不听使唤。只能用这种方式缓慢前行。[l][r]
+你用手扶着墙壁艰难起身。[l][r]
+不知道是不是在地上趴了太久的缘故，你的身体有些僵硬，不听使唤。[l]你只能紧靠墙壁缓缓前行。[l][r]
 不过这也意味着，你有充足的时间来确认自己的状态，或者是观察周围的环境。[l][r]
-[opt target=*node2]低头[endopt][r]
+[opt target=*node2]看看自己[endopt][r]
 [opt target=*node3]环顾四周[endopt][r]
 [s]
 
@@ -78,16 +90,23 @@
 #
 [cm ]
 [eval exp="f.p_n2=1" ]
-你低下头，仔细打量着自己的身体。[l][r]
+你附近的墙壁光滑得足以映出你的倒影。[l][r]
+[chara_show name='w1' top=200 left=20][l]
 ……看上去有些年轻。[l]哪怕以“少女”的标准来说，也显得过于娇小了。[l][r]
 你扯了扯身上的黑色袍子。[l]质地柔软，上面有细腻的花纹。[l]看上去就很贵重。[l][r]
-在袍子的胸口处别着一支黑色的羽毛笔。[l]你把它取下，在手心划了划。[l]没有留下任何痕迹。毕竟没有墨水。[l][r]
+在你的胸口处挂着一支白色的羽毛笔。[l]你把它取下，在手心划了划。[l]没有留下任何痕迹。毕竟没有墨水。[l][r]
 你摸了摸自己的脸颊。[l]比起稚嫩的触感，掌心的冰凉感反倒还更引人注意。[l][r]
 你试着开口说话：[l][r]
+;todo：dual+dialog
+[dial]
+[dual]
 [style name="echo"]话。[endstyle][l][r]
-清脆的声音在长廊里回荡。[l]除了回声之外，你没有得到任何回应。[l][r]
+[current layer="message0" ]
+[narr]
+[layopt layer="message1" visible="false" ]
+如铃般清脆的声音在长廊里回荡。[l]除了回声之外，你没有得到任何回应。[l][r]
 ……这些行为真的能帮你认识自己从前是个怎样的人吗？[l][r]
-你姑且把自己的迷茫埋藏在心里。[l][r]
+你暂且把自己的迷茫埋藏在心里。[l][r]
 [if exp="f.p_n3!=1"][opt target=*node3]环顾四周[endopt]
 [else][opt target=*node4]继续前进[endopt]
 [endif][r][s]
@@ -103,7 +122,7 @@
 神奇的是，你依然可以清晰地看见事物。[l][r]
 视线放远，在你的正前方，长廊的尽头，有一扇紧闭的门。[l][r]
 看起来那里就是你的目标了。[l][r]
-[if exp="f.p_n2!=1"][opt target=*node2]低头[endopt]
+[if exp="f.p_n2!=1"][opt target=*node2]看看自己[endopt]
 [else][opt target=*node4]继续前进[endopt]
 [endif][r][s]
 
@@ -113,17 +132,20 @@
 你继续向前。[l][r]
 经过一段时间的活动，[l][r]
 最后，只剩走廊最后的这一扇门未经你探索了。[l][r]
-[bg storage="../bgimage/corridor_end.jpg" time=500]
+[freeimage layer=0 time=500 ]
+[image layer=0 storage="../image/background/corridor_door.png" time=500 x=80 width=800 y=40 height=800]
 你尝试着推开大门。[l]但没什么效果。[l][r]
 门像是和空间固定在了一起，纹丝不动。[l][r]
 你注意到大门上贴着一张告示。[l][r]
-[opt target=*key]阅读[endopt]
+[opt target=*key]阅读[endopt][r]
 [s]
 
 
 *key
-[current layer="message1"]
+[current layer="message1" ]
+[layopt layer="message1" visible="true" ]
 #
+[er]
 [buildflag name="dream"]
 [style name="record-plain"]
 入馆须知[l][r]
@@ -139,26 +161,121 @@
 另：请参与星沙试炼的魔女相互转告：欢迎你们来找管理员聊天，但我真的不知道你们每个人的题目，求求别再问了。[l][r]
 [endstyle]
 [current layer="message0"]
-[er]
-点一下这个就过了。[l][r]
+...[l][r]
+你揉了揉眼睛，确认自己没看错。[l][r]
+告示里有一个奇怪的符号。[l]你很确信自己不认识它。[l][r]
+但它如此自然地混在其他文字里，以至于你差点怀疑自己脑子出了问题。[l][r]
+……虽然失忆也算是出问题就是了。[l][r]
+总而言之，考虑到告示上面写着“进入本馆之前，请仔细阅读以下须知”……[l]不会是说，要你搞懂了这些符号是什么意思，这门才能打开吧？[l][r]
+虽然有点莫名其妙，但你呆在这儿也没别的事干，还是动动脑子好了。[l][r]
+仔细读了读告示之后，你觉得这个符号的意思是……[l][r]
 [opt target=*solve]阐明[endopt]
 [s]
 
 *solve
+[er]
+[grouplink style="grouplink default-opt" link=[["梦"],["想"],["望"],["重","再"],["幻","忆"]] target=["*solve1","*solve2","*solve3","*solve4","*solve5"]]
+[s]
+
+*solve1
+[er]
+[layopt layer="message0" visible="false"]
+[transit style="record" text1="ɨ̅ɟ̤ɱɒ" text2="梦" x=1440 y=440]
+[layopt layer="message0" visible="true"]
 [claim]
 [endflag]
+告示上的符号“溶解”了。[l][r]
+你很难找出别的词来形容。[l]你确信那是用墨水书写在纸张上的一笔一划，但它就是令人难以置信地改变了形状。[l][r]
+如月溶于夜幕，如日升于苍穹。取代陌生的图腾，你所熟悉的记号从它的残余中浮现。[l][r]
+……梦。[l][r]
+刚才那一幕确实挺梦幻的。[l][r]
+但你伸手捏了捏自己的脸，[l]很痛。[l][r]
+真的会有感触如此真实的梦境吗？[l][r]
+而且，你的思考也依然清晰，不像是在做梦。[l][r]
+……信息量还是太少了。[l][r]
+无论如何，既然你已经看懂了告示，这门大概是能打开了吧？[l][r]
+如果那上面写的东西真实有效，门背后理应存在着一个所谓的“管理员”。[l]对方应该能解答你的疑惑。[l][r]
+[opt target=*node5]推门[endopt]
+
+
 [s]
+*solve2
+[er]
+[count name="p_s2"]
+@jump cond="f.p_s2!=1" target="*solve_n"  
+嗯……“想”吗……[l][r]
+怎么说呢，感觉稍微有点抽象了，不是吗？[l][r]
+你很难想到怎么在这种东西里“迷失”。[l][r]
+应该有更合适的字。[l][r]
+@jump target="*solve" 
 
 
-[bg storage="../bgimage/default.jpg" time=500]
-[cm]
-[mtext text="章一 梦中的梦中人" size=30 x=220 y=200 in_effect="fadeIn" out_effect="fadeOut" time=500 wait=true]
-@jump target=*chap1_c12 
-[s]
+*solve3
+[er]
+[count name="p_s3"]
 
-*chap1_c12
+[jump cond="(f.p_s3!=1)&&f.p_s3!=7" target="*solve_n"]
+[if exp="f.p_s3==7"]
+就这么念念不忘吗？你还真是有点“在‘望’中迷失”了呢。[l]
+[else]
+嗯……“望”吗……[l][r]
+“望见书籍内容”是不是有点离谱了？[l][r]
+感觉挺无厘头的，你不太清楚自己为什么会想到这个。[l][r]
+应该有更合适的字。[l][r]
+[endif]
+@jump target="*solve" 
+
+
+
+*solve4
+[er]
+[count name="p_s4"]
+@jump cond="f.p_s4!=1" target="*solve_n" 
+嗯……如果用来修饰“见”这个字的话，倒是挺通顺的。[l][r]
+但是前两处不太对啊。[l]而且也没什么逻辑性。[l][r]
+应该有更合适的字。[l][r]
+@jump target="*solve" 
+
+
+*solve5
+[er]
+[count name="p_s5"]
+@jump cond="f.p_s5!=1" target="*solve_n" 
+嗯……感觉哪里不对，读起来磕磕绊绊的。[l][r]
+意思上应该差不多。[l]但是没有人会这样说话吧。大概。[l][r]
+应该有更合适的字。[l][r]
+@jump target="*solve" 
+
+
+*solve_n
+[rnd n=5]
+[if exp="tf.rnd==1"]
+……刚才是不是考虑过这个字了？没有吗？[l][r]
+你感觉脑子有点乱乱的。[l][r]
+[elsif exp="tf.rnd==2"]
+嗯……感觉哪里不对，刚才应该有想到过类似的吧？[l][r]
+[elsif exp="tf.rnd==3"]
+这个字刚才是不是分析过了？没有吗？[l][r]
+你感觉脑子有点乱乱的。[l][r]
+[elsif exp="tf.rnd==4"]
+你产生了一种奇妙的既视感，仿佛就在上一刻，与现在完全一致的想法曾从你的脑海中流过。[l][r]
+那大概不是错觉。[l][r]
+你有点起鸡皮疙瘩。[l]为了摆脱这种感觉，你决定重新、仔细想一遍。[l][r]
+[else]
+嗯……对吗？[l][r]
+感觉不是很吻合，应该有更合适的字。[l][r]
+[endif]
+@jump target="*solve" 
+
+
+*node5
 #
+
+[freeimage layer=0 time=500 ]
 [cm]
+[mtext text="第一章" size=30 x=220 y=200 in_effect="fadeIn" out_effect="fadeOut" time=500 wait=true]
+
+
 
 你本以为自己会跌在地上。[l][r]
 ...但是并没有。一股奇异的力量支撑着你，令你维持着身体前倾的姿势。[l][r]

@@ -1,31 +1,40 @@
 :root{
     --downward:linear-gradient(to bottom,#ffffff00,#ffffff40,#6200d280,#2c0757ff,#081847ff, #040930ff,#000000ff);
     --common-transform: rotate(-20deg);
+    --echo:linear-gradient(to right, #F9FFC3FF, #FFDB32FF);
+    --echo-p:#e5ebb4ff;
+    --record:linear-gradient(to right, #e197de, #bd5aff, #8700e180);
+    --record-p:#e197deff;
 }
 .default{
     color: #FFFFFF;
 }
 .echo{
     opacity:1;
-    background-image: var(--downward),linear-gradient(to right, #F9FFC3FF, #FFDB32FF);
-
+    background-image: var(--downward),var(--echo);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 100% 400%;
     background-repeat: no-repeat;
 }
+.echo>text{
+    stroke: var(--echo-p);
+}
 
 .record{
-    background-image: var(--downward),linear-gradient(to right, #e197de, #bd5aff,#8700e180);
+    background-image: var(--downward),var(--record);
     text-shadow: 2px 2px 4px #ad73ab;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 100% 400%;
 }
+.record>text {
+    stroke: var(--record-p);
+}
 .record-plain{
-    color: #e197de;
+    color: var(--record-p);
 }
 
 .default-opt{
@@ -109,6 +118,71 @@
         opacity: 1;
     }
 }
+
+svg {
+    height: 1em;
+    width: 1em;
+    bottom: 0;
+    overflow: visible;
+}
+svg text {
+    font-family: LinguaSomnia;
+    letter-spacing: 0;
+    font-size: 192px;
+    stroke-width: 2;
+    height: 1em;
+}
+
+text {
+    overflow: visible;
+    height: 1em;
+    display: inline-block;
+}
+@keyframes svgEnter {
+    0% {
+        stroke-dasharray: 0 400%;
+        stroke-dashoffset: 100%;
+        fill-opacity: 1;
+        
+    }
+
+    50% {
+        stroke-dasharray: 400% 0;
+        stroke-dashoffset: -100%;
+        fill-opacity: 0;
+    }
+
+    100% {
+        stroke-dasharray: 0 350%;
+        fill-opacity: 0;
+    }
+}
+
+@keyframes svgExit {
+    0% {
+            stroke-dasharray: 0 400%;
+            stroke-dashoffset: 100%;
+            fill-opacity: 0;
+        }
+    
+        50% {
+            stroke-dasharray: 400% 0;
+            stroke-dashoffset: -100%;
+            fill-opacity: 1;
+        }
+    
+        100% {
+            stroke-dasharray: 0 350%;
+            fill-opacity: 1;
+        }
+}
+
+
+
+
+
+
+
 
 
 .grouplink {

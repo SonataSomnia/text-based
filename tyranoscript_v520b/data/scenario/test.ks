@@ -5,10 +5,13 @@
 
 *start
 #
-[current layer="message1"]
+[current layer="message0"]
 [er]
 [resetfont]
-
+@wait time=1500
+[layopt layer="message0" visible="false" ]
+[transit style="echo" text2="回响" text1="ɞːʈʰ˟ɞ̅ʈʐɻ̈˩̀" x=500 y=500]
+[layopt layer="message0" visible="true" ]
 [opt target=*g1]一个字[endopt][r]
 [opt target=*g2]两个字[endopt]
 [s]

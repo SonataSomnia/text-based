@@ -319,7 +319,7 @@
 // 不透明度を指定します。メッセージ枠用の画像が指定されている場合は無効で
 // す。
 ;frameColor = 0x000000; // position タグの color 属性に相当
-;frameOpacity = 128;  // position タグの opacity 属性に相当
+;frameOpacity = 192;  // position タグの opacity 属性に相当
 
 
 
